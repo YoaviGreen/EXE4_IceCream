@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg, NavigationToolbar2QT
+from matplotlib.figure import Figure
 from About import AboutWindow
-
 
 class MainWindow(QWidget):
 
@@ -32,6 +33,17 @@ class MainWindow(QWidget):
         self.about_button = QPushButton('About', self)
         self.about_button.setGeometry(685, 20, 115, 35)
         self.about_button.clicked.connect(self.show_about_window)
+        
+        self.figure = Figure()
+        self.ax = self.figure.add_subplot(1, 1, 1)
+        self.ax.set_title('Choose a file to see the graph')
+
+        self.canvas = FigureCanvasQTAgg(self.figure)
+        self.canvas.setParent(self)
+        self.canvas.setGeometry(20, 120, 780, 500)
+
+        self.toolbar = NavigationToolbar2QT(self.canvas, self)
+        self.toolbar.setGeometry(20, 70, 780, 40)
 
     def show_about_window(self):
         self.about_window.show()
