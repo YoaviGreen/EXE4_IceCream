@@ -1,3 +1,4 @@
+import numpy as np
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit, QFileDialog
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg, NavigationToolbar2QT
 from matplotlib.figure import Figure
@@ -68,6 +69,15 @@ class MainWindow(QWidget):
     def draw_graph(self):
         self.ax.clear()
         self.ax.scatter(self.temperatures, self.revenues, s=1, color='blue')
+        
+        coefficients = np.polyfit(self.temperatures, self.revenues, 1)
+        line_function = np.poly1d(coefficients)
+        line_x = np.linspace(min(self.temperatures), max(self.temperatures), 100)
+        line_y = line_function(line_x)
+        self.ax.plot(line_x, line_y, color='red')
+
+        self.ax.text(min(self.temperatures), 0.9 * max(self.revenues),
+                     f'y = {coefficients[0]:.2f}x + {coefficients[1]:.2f}', color='red', fontsize=14)
 
         self.ax.set_title('Ice Cream Revenue vs Temperature')
         self.ax.set_xlabel('Temperature (°C)')
