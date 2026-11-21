@@ -35,7 +35,7 @@ class MainWindow(QWidget):
         self.about_button = QPushButton('About', self)
         self.about_button.setGeometry(685, 20, 115, 35)
         self.about_button.clicked.connect(self.show_about_window)
-        
+
         self.figure = Figure()
         self.ax = self.figure.add_subplot(1, 1, 1)
         self.ax.set_title('Choose a file to see the graph')

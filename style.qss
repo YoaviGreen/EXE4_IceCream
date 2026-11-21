@@ -61,3 +61,22 @@ QLineEdit#output {
     padding: 5px;
     background-color: #1e1e1e;
 }
+
+SubplotToolQt {
+    min-width: 480px;
+    min-height: 300px;
+}
+
+SubplotToolQt QDoubleSpinBox {
+    min-width: 95px;
+    padding: 2px 6px;
+}
+
+FormDialog {
+    min-width: 520px;
+    min-height: 580px;
+}
+
+FormDialog QLineEdit {
+    min-width: 240px;
+}
